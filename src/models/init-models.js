@@ -1,14 +1,18 @@
-var DataTypes = require("sequelize").DataTypes;
-var _users = require("./users");
+import { DataTypes } from "sequelize";
+import _posts from './posts.js'
+import _users from './users.js'
 
-function initModels(sequelize) {
+
+export function initModels(sequelize) {
+  var posts = _posts(sequelize, DataTypes);
   var users = _users(sequelize, DataTypes);
 
+  posts.belongsTo(users, { as: "users", foreignKey: "userid"});
+  users.hasMany(posts, { as: "posts", foreignKey: "userid"});
 
   return {
+    posts,
     users,
   };
 }
-module.exports = initModels;
-module.exports.initModels = initModels;
-module.exports.default = initModels;
+

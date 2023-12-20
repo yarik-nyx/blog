@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {regValidator} from '../validations/auth.js'
 import {userController} from '../controllers/UserController.js'
+import {checkAuthMid} from '../middlewares/checkAuth.js'
 export const authRouter = new Router()
 
 authRouter.get('/', (req, res) => {
@@ -9,7 +10,9 @@ authRouter.get('/', (req, res) => {
     })
 })
 
-authRouter.post('/signin', regValidator, userController.register)
+authRouter.post('/signup', regValidator, userController.register)
 
-authRouter.post('/signup', regValidator)
+authRouter.post('/signin', regValidator, userController.login)
+
+authRouter.get('/me', checkAuthMid, userController.getMe)
 
