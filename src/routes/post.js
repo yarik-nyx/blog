@@ -7,6 +7,8 @@ export const postRouter = new Router()
 
 postRouter.get('/', postController.getAllPosts)
 
+postRouter.get('/tags', postController.getTags)
+
 postRouter.get('/:id', postController.getPost)
 
 postRouter.post('/', checkAuthMid, postValidator, postController.createPost)

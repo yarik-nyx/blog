@@ -12,6 +12,7 @@ class UserRepo{
     }
 
     async findUserById(id){
+       
         const user = await this.models.users.findOne({where : {id}})
         return user
     }

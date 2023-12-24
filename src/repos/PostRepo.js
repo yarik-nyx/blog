@@ -19,6 +19,12 @@ class PostRepo{
         
     }
 
+    async getTags(){
+        return await this.models.posts.findAll({
+            attributes: ['tags']
+        })
+    }
+
     async getPost(id){
         await this.models.posts.increment(
             {viewcount: +1},
@@ -44,6 +50,7 @@ class PostRepo{
     }
 
     async updatePost(id, body){
+
         const post =  await this.models.posts.update(
             body,
             {where: {id}}

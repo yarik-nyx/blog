@@ -1,11 +1,13 @@
 import dotenv from 'dotenv'
 import express from 'express'
+import cors from 'cors'
 import {authRouter} from './src/routes/auth.js'
 import {postRouter} from './src/routes/post.js'
 import {errorMid} from './src/middlewares/errorMid.js'
 dotenv.config()
 const app = express()
 
+app.use(cors())
 
 //body json
 app.use(express.json())

@@ -15,8 +15,10 @@ const db = new Sequelize(
 
 const checkDbConnection = async function(){
     try {
+        
         await db.authenticate()
-        console.log('Db is working');     
+        console.log('Db is working'); 
+           
     } catch (error) {
         throw Error(error)
     }

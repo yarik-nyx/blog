@@ -37,6 +37,6 @@ export default function(sequelize, DataTypes) {
     sequelize,
     tableName: 'posts',
     schema: 'public',
-    timestamps: false
+    timestamps: true
   });
 };

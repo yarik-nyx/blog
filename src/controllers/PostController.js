@@ -63,6 +63,25 @@ class PostController{
         }
     }
 
+    async getTags(req, res, next){
+        try {
+            const errors = validationResult(req)
+            if(!errors.isEmpty()){
+                return res.status(400).send({
+                    errors: errors.array({onlyFirstError:true})
+                })
+            }
+
+            const tags = await postService.getTags()
+            res.send({
+                success: 'OK',
+                tags
+            })
+        } catch (error) {
+           next(error) 
+        }
+    }
+
     async updatePost(req, res, next){
         try {
             const errors = validationResult(req)

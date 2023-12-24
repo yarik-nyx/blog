@@ -5,8 +5,23 @@ import {postRepo} from '../repos/PostRepo.js'
 
 class PostService{
     async getAllPosts(){
-        const posts = await postRepo.getAllPosts()
-        return posts
+        return await postRepo.getAllPosts()
+        
+    }
+
+    async getTags(){
+        const tags =  await postRepo.getTags()
+        let out = tags.map((tag) => tag.dataValues.tags)
+        out = out.flat()
+        const output = out.reduce((accum, curVal) => {
+            if(!accum.includes(curVal)){
+                accum.push(curVal)
+            }
+            return accum
+        }, [])
+        console.log(output);
+        return output
+        
     }
 
     async getPost(id){
