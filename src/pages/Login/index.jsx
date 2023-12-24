@@ -4,10 +4,15 @@ import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { useForm } from 'react-hook-form'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
+import { fetchAuth, selectIsAuth } from '../../redux/slices/auth'
 import styles from "./Login.module.scss";
 
 export const Login = () => {
+  const isAuth = useSelector(selectIsAuth)
+  const dispatch = useDispatch()
+
   const {register, handleSubmit, setError, formState: {errors, isValid}} = useForm({
     defaultValues:{
       email: "",
@@ -16,8 +21,22 @@ export const Login = () => {
     mode: 'onChange'
   })
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = async (values) => {
+    const data = await dispatch(fetchAuth(values))
+    console.log(data);
+    if(!data.payload){
+      return alert('Could not auth')
+    }
+
+    if('token' in data.payload.user){
+      window.localStorage.setItem('token', data.payload.user.token)
+    }
+  }
+
+  // React.useEffect()
+
+  if(isAuth){
+    return <Navigate to='/'/>
   }
 
   return (
@@ -40,6 +59,7 @@ export const Login = () => {
           label="Пароль" 
           error={Boolean(errors.password?.message)}
           helperText={errors.password?.message}
+          type='password'
           {...register('password', {required: 'Укажите пароль'})}
           fullWidth 
         />
