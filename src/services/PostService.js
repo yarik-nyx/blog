@@ -19,7 +19,6 @@ class PostService{
             }
             return accum
         }, [])
-        console.log(output);
         return output
         
     }

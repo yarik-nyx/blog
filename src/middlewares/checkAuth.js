@@ -7,7 +7,9 @@ export async function checkAuthMid(req, res, next){
     let token = req.headers.authorization
 
     if(token){
-        token = token.split(" ")[1]
+        if(token.includes('Bearer')){
+            token = token.split(" ")[1]
+        }
         try {
             const decoded = jwt.verify(token, process.env.JWT_KEY)
             req.userId = decoded._id
