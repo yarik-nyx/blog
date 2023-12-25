@@ -1,7 +1,6 @@
-import { DataTypes } from "sequelize";
+import {DataTypes} from 'sequelize'
 import _posts from './posts.js'
 import _users from './users.js'
-
 
 export function initModels(sequelize) {
   var posts = _posts(sequelize, DataTypes);
@@ -15,4 +14,5 @@ export function initModels(sequelize) {
     users,
   };
 }
+
 

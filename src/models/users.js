@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize";
+import Sequelize from 'sequelize'
 export default function(sequelize, DataTypes) {
   return sequelize.define('users', {
     id: {
@@ -8,27 +8,27 @@ export default function(sequelize, DataTypes) {
       primaryKey: true
     },
     email: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(255),
       allowNull: false
     },
     hashedpass: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(255),
       allowNull: false
     },
     firstname: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(255),
       allowNull: true
     },
     lastname: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(255),
       allowNull: true
     },
     patr: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(255),
       allowNull: true
     },
     avatarurl: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(255),
       allowNull: true
     }
   }, {
@@ -39,6 +39,13 @@ export default function(sequelize, DataTypes) {
     indexes: [
       {
         name: "users_pk",
+        unique: true,
+        fields: [
+          { name: "id" },
+        ]
+      },
+      {
+        name: "users_pkey",
         unique: true,
         fields: [
           { name: "id" },

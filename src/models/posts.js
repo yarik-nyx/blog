@@ -1,4 +1,4 @@
-import { Sequelize } from "sequelize";
+import Sequelize from 'sequelize'
 export default function(sequelize, DataTypes) {
   return sequelize.define('posts', {
     id: {
@@ -8,7 +8,7 @@ export default function(sequelize, DataTypes) {
       primaryKey: true
     },
     title: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(255),
       allowNull: false
     },
     text: {
@@ -17,8 +17,8 @@ export default function(sequelize, DataTypes) {
     },
     tags: {
       type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: false,
-      defaultValue: []
+      allowNull: true,
+      defaultValue: ["(ARRAY[]"]
     },
     userid: {
       type: DataTypes.INTEGER,
@@ -32,11 +32,24 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0
+    },
+    imageurl: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     sequelize,
     tableName: 'posts',
     schema: 'public',
-    timestamps: true
+    timestamps: true,
+    indexes: [
+      {
+        name: "posts_pkey",
+        unique: true,
+        fields: [
+          { name: "id" },
+        ]
+      },
+    ]
   });
 };

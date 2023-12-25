@@ -28,6 +28,13 @@ class PostService{
     }
 
     async createPost(body){
+        let {tags} = body
+        try{
+            body.tags = tags.split(',')
+        } catch(err){
+            body.tags = tags.split()
+        }
+        console.log(body);
         return await postRepo.createPost(body)
 
     }
@@ -38,6 +45,13 @@ class PostService{
             throw ApiError.BadRequest('Такого поста не существует.')
         }
         if(post.userid == userId){
+            let {tags} = body
+            try{
+                body.tags = tags.split(',')
+            } catch(err){
+                body.tags = tags.split()
+            }
+            console.log(body);
              await postRepo.updatePost(id, body)
              return await postRepo.getPost(id)
         } else {

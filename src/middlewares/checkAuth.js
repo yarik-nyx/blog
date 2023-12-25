@@ -13,12 +13,12 @@ export async function checkAuthMid(req, res, next){
         try {
             const decoded = jwt.verify(token, process.env.JWT_KEY)
             req.userId = decoded._id
-            next()
+            await next()
         } catch (error) {
-            next(ApiError.BadRequest('Нет доступа.'))
+            await next(ApiError.BadRequest('Нет доступа.'))
         }
     } else {
-        next(ApiError.BadRequest('Нет доступа.'))
+        await next(ApiError.BadRequest('Нет доступа.'))
     }
 
 
