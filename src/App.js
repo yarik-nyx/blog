@@ -8,12 +8,14 @@ import { fetchAuthMe, selectIsAuth } from './redux/slices/auth';
 
 function App() {
   const dispatch = useDispatch()
-  const isAuth = useSelector(selectIsAuth)
 
-  console.log('isAuth', isAuth);
+
 
   useEffect(() => {
-    dispatch(fetchAuthMe())
+    const func = async () => {
+      await dispatch(fetchAuthMe())
+    }
+    func()
   }, [])
 
   return (

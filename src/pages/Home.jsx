@@ -13,7 +13,8 @@ export const Home = () => {
   const dispatch = useDispatch();
 
   const { posts, tags } = useSelector((state) => state.posts);
-  console.log(tags);
+  const userData = useSelector((state) => state.auth.data);
+
   const isPostsLoading = posts.status === 'loading';
   const isTagsLoading = tags.status === 'loading';
 
@@ -38,12 +39,13 @@ export const Home = () => {
               <Post
                 id={obj.id}
                 title={obj.title}
-                imageUrl={obj.imageUrl ? `${process.env.REACT_APP_API_URL}${obj.imageUrl}` : ''}
+                imageUrl={obj.imageurl ? `http://localhost:4444${obj.imageurl}` : ""}
                 user={obj.users}
                 createdAt={obj.createdAt}
                 viewsCount={obj.viewcount}
                 commentsCount={3}
                 tags={obj.tags}
+                isEditable={(userData?.user.id === obj.users.id) || (userData?.user.id === 1)}
                 
               />
             ),

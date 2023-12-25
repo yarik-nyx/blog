@@ -35,10 +35,16 @@
   }
 }
 
+.buttons_margin {
+  margin-bottom: 10px;
+  margin-right: 40px;
+}
+
 .buttons {
   display: flex;
 
   button {
     margin-right: 15px;
+    
   }
 }

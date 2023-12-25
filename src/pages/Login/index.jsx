@@ -23,7 +23,7 @@ export const Login = () => {
 
   const onSubmit = async (values) => {
     const data = await dispatch(fetchAuth(values))
-    console.log(data);
+
     if(!data.payload){
       return alert('Could not auth')
     }
@@ -33,7 +33,6 @@ export const Login = () => {
     }
   }
 
-  // React.useEffect()
 
   if(isAuth){
     return <Navigate to='/'/>
@@ -63,7 +62,7 @@ export const Login = () => {
           {...register('password', {required: 'Укажите пароль'})}
           fullWidth 
         />
-        <Button type="submit" size="large" variant="contained" fullWidth>
+        <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
           Войти
         </Button>
       </form>
